@@ -1,5 +1,6 @@
 import * as schema from '../../../schema/manifest-1.0.json'
 import Ajv2020 from 'ajv/dist/2020'
+import * as R from 'remeda'
 
 export class ManifestValidator {
   private readonly ajv
@@ -8,14 +9,18 @@ export class ManifestValidator {
     this.ajv = new Ajv2020()
   }
 
-  public validate (manifest: any): void {
+  public validate (manifest: object): void {
     const validateFunction = this.ajv.compile(schema)
     const valid = validateFunction(manifest)
-    console.log(validateFunction.errors)
-    if (valid) {
-      console.log('valid')
-    } else {
-      console.log('not valid')
+    const errors = validateFunction.errors ?? []
+    if (!valid) {
+      const errorMessagesString = R
+        .map(errors, (error) => {
+          return `[path: '${error.instancePath}'] [message: '${error.message ?? 'unknown error'}']`
+        })
+        .join(',')
+
+      throw new Error(`Storage shipper manifest is not valid. Error: ${errorMessagesString}`)
     }
   }
 }
