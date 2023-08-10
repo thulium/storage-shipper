@@ -1,0 +1,14 @@
+type/epic:
+  - head-branch: ^epic/
+type/feature:
+  - head-branch: ^feature/
+type/bug:
+  - head-branch: ^bug/
+type/housekeeping:
+  - head-branch: ^housekeeping/
+type/dependencies:
+  - head-branch: ^dependabot/
+  - head-branch: ^dependencies/
+
+module/core:
+  - changed-files: packages/core/**/*
