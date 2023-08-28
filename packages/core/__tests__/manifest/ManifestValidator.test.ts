@@ -1,4 +1,4 @@
-import { ManifestValidator } from '../src/ManifestValidator'
+import { ManifestValidator } from '../../src/manifest/ManifestValidator'
 
 describe('manifest validator test', () => {
   it('should not throw exception when json is valid', () => {

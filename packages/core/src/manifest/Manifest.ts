@@ -3,7 +3,7 @@ export interface Manifest {
   deploy: Deploy[]
 }
 
-interface Deploy {
+export interface Deploy {
   name: string
   include: string
   headers?: object
