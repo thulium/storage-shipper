@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thulium.io/schema/storage-shipper/manifest",
+  "title": "Manifest",
+  "description": "Storage sipper manifest schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the manifest",
+      "pattern": "^([1-9]\\d*)\\.(?:0|[1-9]\\d*)$"
+    },
+    "deploy": {
+      "type": "array",
+      "description": "List of deployment rules",
+      "items": {
+        "$ref": "#/definitions/deploy-item"
+      }
+    }
+  },
+  "required": [
+    "version",
+    "deploy"
+  ],
+  "definitions": {
+    "deploy-item": {
+      "type": "object",
+      "description": "Single deploy rule",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the deployment rule"
+        },
+        "include": {
+          "type": "string",
+          "description": "Pattern for selecting files (minimatch)"
+        },
+        "headers": {
+          "type": "object",
+          "description": "Name value header pair"
+        }
+      },
+      "required": [
+        "name",
+        "include"
+      ]
+    }
+  }
+}
